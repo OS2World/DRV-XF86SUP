@@ -1,0 +1,32 @@
+XF86SUP Driver Info
+
+This driver is a helper driver for the XFree86/OS2
+project. Note this is NOT XFree86/OS2 itself. This driver offers some
+features which were missing in OS/2 before or were available inefficiently
+only.
+
+It is a multiple device driver containing the following sub-devices:
+/dev/pmap$
+  gives you access to the physical memory of the PC. Warning: you should never
+  use this to access the main RAM memory, as this could cause severe damage to
+  the integrity of data managed by the OS/2 system (I once managed to crash the
+  system this way and this corrupted the system so severely that I needed to
+  re-install), but only to access adapter memory (data acquisition cards or
+  aperture video memory) which you know for sure that OS/2 does not know or
+  manage it itself. Required for Xservers for instance.
+/dev/fastio$
+  allows a fast method - the fastest possible - of getting access to I/O ports.
+  Read the article "32-Bit I/O With Warp Speed" in the "EDM/2" electronic
+  journal for a discussion. Note the driver version in XF86SUP is an improved 
+  one, which uses an even faster method than the one described in the journal; 
+  some day I will describe it in more detail. Required for Xservers for 
+  instance.
+/dev/tty[pq][0-f], /dev/pty[pq][0-f], /dev/ptms$
+  These are drivers that closely emulate 4.4BSD pseudo-TTY drivers (PTYs);
+  such drivers are required to get xterm and xdm for XFree86/OS2 running. Also
+  a future version of Emacs for OS/2 will take advantage of these devices.
+/dev/console$
+  This emulates a Unix style /dev/console device. This understands the 
+  TIOCCONS ioctl and other BSD ioctls. Also the PTYs may grab the console
+  (required for xterm -C and xconsole).
+
